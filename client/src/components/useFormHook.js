@@ -5,14 +5,13 @@ function useForm(initialValue, cb) {
 
   const handleChanges = e => {
     e.preventDefault();
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    cb();
-  };
-  return [values, handleChanges, handleSubmit];
+  return [values, handleChanges];
 }
 
 export default useForm;

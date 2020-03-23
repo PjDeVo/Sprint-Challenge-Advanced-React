@@ -28,7 +28,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {this.state.players && <AddForm players={this.state.players} />}
+        {this.state.players.length > 0 && (
+          <AddForm players={this.state.players} />
+        )}
       </div>
     );
   }

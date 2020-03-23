@@ -4,21 +4,20 @@ import PlayerCard from "./PlayerId";
 
 function AddForm(props) {
   const data = props.players;
-  // const [playerList, setPlayerList] = useForm(data);
+  const [playerList, setPlayerList] = useState(data);
   // const [formNameValue, setFormNameValue] = useState("");
   // const [formCountryValue, setFormCountryValue] = useState("");
-  const [values, changeHandler, handleSubmit] = useForm(
-    data
-    // console.log("hi")
-  );
-  console.log(data);
-  console.log(values);
+
+  const [values, changeHandler] = useForm(data);
+  // console.log(data);
+  // console.log("here are the values", values);
   // console.log("here is props.players", players);
   // console.log("testing state", playerList);
 
-  // const handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   // setPlayerList(formValue);
+  const handleFormSubmit = event => {
+    event.preventDefault();
+    setPlayerList(values);
+  };
 
   //   // console.log("here is the submit console", playerList);
   // };
@@ -31,9 +30,10 @@ function AddForm(props) {
   // };
   return (
     <div>
-      <form className="new-player-form" onSubmit={handleSubmit}>
+      <form className="new-player-form" onSubmit={handleFormSubmit}>
         <label>Add New Player Name</label>
         <input
+          data-testid="name-input"
           name="name"
           value={values.name}
           onChange={changeHandler}
@@ -42,6 +42,7 @@ function AddForm(props) {
         />
         <label>Add New Player Country</label>
         <input
+          data-testid="country-input"
           name="country"
           value={values.country}
           onChange={changeHandler}
@@ -51,7 +52,8 @@ function AddForm(props) {
 
         <button> Submit</button>
       </form>
-      <PlayerCard players={data} />
+
+      <PlayerCard players={playerList} />
     </div>
   );
 }
